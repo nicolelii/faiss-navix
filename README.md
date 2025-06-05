@@ -52,8 +52,8 @@ auto distances = new float[k];
 index.efSearch = 200
 
 // Hybrid search using Navix
-index.navix_search(num_queries, queries, k, distances, labels, filter_mask);
+index.navix_single_search(num_queries, queries, k, distances, labels, filter_mask);
 
 // Regular search without Navix
-index.search(num_queries, queries, k, distances, labels);
+index.single_search(num_queries, queries, k, distances, labels);
 ```
