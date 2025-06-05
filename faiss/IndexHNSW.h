@@ -65,6 +65,33 @@ struct IndexHNSW : Index {
             idx_t* labels,
             const SearchParameters* params = nullptr) const override;
 
+    /// navix search
+    void single_search(
+        const float* query,
+        idx_t k,
+        float* distances,
+        idx_t* labels,
+        VisitedTable &vt,
+        HNSWStats& stats) const;
+
+    void navix_search(
+         idx_t n,
+         const float* x,
+         idx_t k,
+         float* distances,
+         idx_t* labels,
+         const char* filter_masks,
+         const SearchParameters* params = nullptr) const;
+
+    void navix_single_search(
+            const float* query,
+            idx_t k,
+            float* distances,
+            idx_t* labels,
+            const char* filter_mask,
+            VisitedTable &vt,
+            HNSWStats& stats) const;
+
     void range_search(
             idx_t n,
             const float* x,
