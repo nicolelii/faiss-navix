@@ -50,9 +50,11 @@ auto labels = new faiss::idx_t[k];
 auto distances = new float[k];
 index.efSearch = 200
 
+faiss::VisitedTable visited(num_data_points);
+faiss::HNSWStats stats;
 // Hybrid search using Navix
-index.navix_single_search(query, k, distances, labels, filter_mask);
+index.navix_single_search(query, k, distances, labels, reinterpret_cast<char*>(filter_mask), visited, stats);
 
 // Regular search without Navix
-index.single_search(query, k, distances, labels);
+index.single_search(query, k, distances, labels, visited, stats);
 ```
