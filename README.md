@@ -26,6 +26,7 @@ Initialize the index
 int M = 32;
 int dimension = 1024;
 auto index = faiss::IndexHNSWFlat(dimension, M, faiss::METRIC_L2);
+index.efConstruction = 200
 ```
 
 Construct the index
@@ -48,6 +49,7 @@ float* queries = ...; // Your query points
 
 auto labels = new faiss::idx_t[k];
 auto distances = new float[k];
+index.efSearch = 200
 
 // Hybrid search using Navix
 index.navix_search(num_queries, queries, k, distances, labels, filter_mask);
