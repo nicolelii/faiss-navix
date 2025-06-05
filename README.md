@@ -19,7 +19,7 @@ Our Paper for more info and benchmarks against SOTA baselines: https://cs.uwater
 
 The library is mostly implemented in C++, the only dependency is a [BLAS](https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms) implementation. It compiles with cmake. See [INSTALL.md](INSTALL.md) for details.
 
-## How Navix works
+## How it works?
 
 Initialize the index
 ```c++
