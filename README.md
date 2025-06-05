@@ -44,16 +44,15 @@ for (int i = 0; i < num_data_points; ++i) {
     filter_mask[i] = ...; // Set filter mask based on your predicate (1 for include, 0 for exclude)
 }
 
-int num_queries = ...; // Number of queries
-float* queries = ...; // Your query points
+float* query = ...; // Your query point
 
 auto labels = new faiss::idx_t[k];
 auto distances = new float[k];
 index.efSearch = 200
 
 // Hybrid search using Navix
-index.navix_single_search(num_queries, queries, k, distances, labels, filter_mask);
+index.navix_single_search(query, k, distances, labels, filter_mask);
 
 // Regular search without Navix
-index.single_search(num_queries, queries, k, distances, labels);
+index.single_search(query, k, distances, labels);
 ```
