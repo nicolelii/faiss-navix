@@ -15,9 +15,17 @@ Navix is originally implemented on top of Kuzu, an embedded graph database syste
 
 Our Paper for more info and benchmarks against SOTA baselines: https://cs.uwaterloo.ca/~ssalihog/papers/navix-tr.pdf
 
-## Installing
+## Build From Source
 
-The library is mostly implemented in C++, the only dependency is a [BLAS](https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms) implementation. It compiles with cmake. See Building from source section in [INSTALL.md](INSTALL.md) for details.
+The library is mostly implemented in C++, the only dependency is a [BLAS](https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms) implementation. It compiles with cmake. 
+
+Simple build instructions for Linux:
+```shell
+> cmake -B build -FAISS_OPT_LEVEL=avx512 -DCMAKE_BUILD_TYPE=Release -DFAISS_USE_LTO=ON -DBUILD_TESTING=OFF  .
+> make -C build -j faiss_avx512 install
+```
+
+See Building from source section in [INSTALL.md](INSTALL.md) for more details.
 
 ## How it works?
 
