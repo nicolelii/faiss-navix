@@ -46,6 +46,8 @@ index.add(num_data_points, data);
 
 Search the index
 ```c++
+// Single query search
+
 int k = 100; // Number of nearest neighbors to search
 uint8_t* filter_mask = new uint8_t[num_data_points]; // Filter mask for predicate
 for (int i = 0; i < num_data_points; ++i) {
@@ -53,20 +55,21 @@ for (int i = 0; i < num_data_points; ++i) {
 }
 
 float* query = ...; // Your query point
-
 auto labels = new faiss::idx_t[k];
 auto distances = new float[k];
 index.efSearch = 200
-
 faiss::VisitedTable visited(num_data_points);
 faiss::HNSWStats stats;
+
 // Hybrid search using Navix
 index.navix_single_search(query, k, distances, labels, reinterpret_cast<char*>(filter_mask), visited, stats);
 
 // Regular search without Navix
 index.single_search(query, k, distances, labels, visited, stats);
 
-// For multiple queries and parallel search
+// ====================================== OR ==========================================
+// Multiple queries and parallel search
+
 int num_queries = ...; // Number of queries
 float* queries = ...; // Your query points
 labels = new faiss::idx_t[num_queries * k];
@@ -77,6 +80,7 @@ for (int i = 0; i < num_queries; ++i) {
         filter_mask[i * num_data_points + j] = ...; // Set filter mask for each query
     }
 }
+
 // Hybrid search for multiple queries
 index.navix_search(num_queries, queries, k, distances, labels, reinterpret_cast<char*>(filter_masks));
 
