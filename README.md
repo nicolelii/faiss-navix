@@ -65,4 +65,21 @@ index.navix_single_search(query, k, distances, labels, reinterpret_cast<char*>(f
 
 // Regular search without Navix
 index.single_search(query, k, distances, labels, visited, stats);
+
+// For multiple queries and parallel search
+int num_queries = ...; // Number of queries
+float* queries = ...; // Your query points
+labels = new faiss::idx_t[num_queries * k];
+distances = new float[num_queries * k];
+uint8_t* filter_masks = new uint8_t[num_data_points * num_queries]; // Filter mask for multiple queries
+for (int i = 0; i < num_queries; ++i) {
+    for (int j = 0; j < num_data_points; ++j) {
+        filter_mask[i * num_data_points + j] = ...; // Set filter mask for each query
+    }
+}
+// Hybrid search for multiple queries
+index.navix_search(num_queries, queries, k, distances, labels, reinterpret_cast<char*>(filter_masks));
+
+// Regular search for multiple queries
+index.search(num_queries, queries, k, distances, labels);
 ```
