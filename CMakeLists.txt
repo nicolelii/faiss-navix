@@ -67,6 +67,8 @@ option(FAISS_ENABLE_PYTHON "Build Python extension." OFF)
 option(FAISS_ENABLE_C_API "Build C API." OFF)
 option(FAISS_ENABLE_EXTRAS "Build extras like benchmarks and demos" ON)
 option(FAISS_USE_LTO "Enable Link-Time optimization" OFF)
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -march=native")
 
 if(FAISS_ENABLE_GPU)
   if(FAISS_ENABLE_ROCM)
